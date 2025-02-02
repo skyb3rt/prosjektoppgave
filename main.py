@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# oppgave a. Les inn data fra excel filen og lagre kolonnene i arrays
+# Oppgave a. Les inn data fra excel filen og lagre kolonnene i arrays
 FILENAME = "support_uke_24.xlsx"
 UKEDAGER = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag"]
 
@@ -25,7 +25,7 @@ score = support_df["Tilfredshet"].to_numpy()
 # Fjerne NaN verdier fra score og sette de som None
 score=np.where(pd.isna(score), None, score)
 
-# oppgave b. Finne antall henvedelser per dag og visualisere ved bruk av et søylediagram
+# Oppgave b. Finne antall henvedelser per dag og visualisere ved bruk av et søylediagram
 
 def antall_henvendelser_per_dag(dager:np) -> dict:
     '''
@@ -38,14 +38,14 @@ plt.bar(antall_henvendelser_per_dag(u_dag).keys(), antall_henvendelser_per_dag(u
 plt.title("Antall henvendelser per dag")
 plt.xlabel("Ukedag")
 plt.ylabel("Antall henvendelser")
-#plt.show()
+plt.show()
 
-# oppgave c. Finn minste og lengste samtaletid som er loggført for uke 2
+# Oppgave c. Finn minste og lengste samtaletid som er loggført for uke 2
 
 print (f"Minste samtaletid: {np.min(varighet)}")
 print (f"Lengste samtaletid: {np.max(varighet)}")
 
-# oppgave d. Regner ut gjennomsnittlig samtaletid basert på alle henvendelser i uke 24
+# Oppgave d. Regner ut gjennomsnittlig samtaletid basert på alle henvendelser i uke 24
 
 def regn_ut_gjennomsnittlig_samtaletid(varigheter:np) -> float:
     '''Funksjon som regner ut gjennomsnittlig samtaletid'''
@@ -76,11 +76,9 @@ def antall_henvendelser_per_bolk(klokkeslett:np)-> dict:
     return antall
 
 antall_pr_blokk=antall_henvendelser_per_bolk(kl_slett)
-'''kakedigram'''
-#plt.close()
 plt.pie(antall_pr_blokk.values(), labels=antall_pr_blokk.keys(), autopct='%1.1f%%')
 plt.title("Antall henvendelser per tidsblokk")
-#plt.show()
+plt.show()
 
 # Oppgave f. Supportavdelingens NP
 def supportavdelingens_np(tilbakemeldinger:np) -> float:
@@ -96,10 +94,6 @@ def supportavdelingens_np(tilbakemeldinger:np) -> float:
                 case _ as status if 9<=status<=10:
                     fornoyd_score["postiv"]+=1
     antall_tilbakemeldinger = sum(fornoyd_score.values())
-    print(fornoyd_score)
-    print(antall_tilbakemeldinger)
-    print(fornoyd_score["postiv"]/antall_tilbakemeldinger*100)
-    print(fornoyd_score["negativ"]/antall_tilbakemeldinger*100)
     return ((fornoyd_score["postiv"]/antall_tilbakemeldinger)-
             (fornoyd_score["negativ"]/antall_tilbakemeldinger))*100
 
